@@ -54,7 +54,7 @@ the openLCA application under https://github.com/GreenDelta/olca-app.
 The easiest way to get the code and to stay up to date with the
 development of openLCA is to install git and clone these repositories:
 
-``` {.bash language="bash"}
+```bash
 git clone https://github.com/GreenDelta/olca-app
 git clone https://github.com/GreenDelta/olca-modules
 ```
@@ -70,7 +70,7 @@ modules and for the dependency management in the openLCA application.
 Thus, you need to have Maven installed. The `olca-modules` is a Maven
 multi-modules project. If you navigate to this repository and type
 
-``` {.bash language="bash"}
+```bash
 mvn install -DskipTests=true
 ```
 
@@ -82,7 +82,7 @@ ojAlgo and install it into our local repository manually. Therefore,
 download the current ojAlgo package and install the `ojalgo-VERSION.jar`
 using the following command:
 
-``` {.bash language="bash"}
+```bash
 mvn install:install-file -Dfile=ojalgo-VERSION.jar \ 
 -DgroupId=org.ojalgo -DartifactId=ojalgo \
 -Dversion=VERSION -Dpackaging=jar
@@ -107,7 +107,7 @@ To make the development cycle a bit more convenient there is a small
 shell/batch script located in the `olca-app` project which combines all
 the Maven related tasks:
 
-``` {.bash language="bash"}
+```bash
  # compile and install olca-modules and update 
  # the dependencies in olca-app
  ./olca-app/update_modules.sh
@@ -157,75 +157,40 @@ should see the following projects in the Eclipse workspace:
 
 ![openLCA projects](images/structure_projects.png)
 
-olca-app
-
-:   \
+* `olca-app`: 
     Contains the openLCA application that is based on Eclipse RCP: the
     user interface, editor logic, database management etc.
-
-olca-app-build
-
-:   \
+* `olca-app-build`:
     Contains the build scripts, tools, and runtimes for compiling and
     packaging the RCP application for Windows, Linux, and Mac OS.
-
-olca-core
-
-:   \
+* `olca-core`:
     Contains the openLCA data model, calculation procedures, and
     functionality for interacting with a database.
-
-olca-ecospold-1
-
-:   \
+* `olca-ecospold-1`:
     Contains the data model for automatic binding of EcoSpold 1 XML
     files to object graphs and the other way around.
-
-olca-ecospold-2
-
-:   \
+* `olca-ecospold-2`:
     Same as olca-ecospold-1 but for the EcoSpold 2 data format.
-
-olca-eigen
-
-:   \
+* `olca-eigen`:
     Provides JNI[^11] wrappers to the high performance math libraries
     OpenBLAS[^12] and Eigen[^13].
-
-olca-formula
-
-:   \
+* `olca-formula`:
     Contains a formula interpreter that is used for parameter evaluation
     in different scopes in openLCA.
-
-olca-geo
-
-:   \
+* `olca-geo`:
     Contains the functionality for localized LCIA calculations including
     the handling of shapefiles and KML data.
-
-olca-ilcd
-
-:   \
+* `olca-ilcd`:
     Contains the data model for automatic binding of ILCD XML files to
     object graphs and the other way around. It supports the storing and
     reading of ILCD files from folders, ZIP files, and ILCD network
     nodes (i.e. soda4LCA servers[^14]).
-
-olca-io
-
-:   \
+* `olca-io`:
     Contains the mappings and export/import interfaces from the openLCA
     data model to various data formats.
-
-olca-simapro-csv
-
-:   \
+* `olca-simapro-csv`:
     Contains a parser and data model for reading SimaPro CSV files.
-
-openlca.runtime
-
-:   \
+* `openlca.runtime`:
     Contains the dependencies (i.e. the OSGi bundles) of the openLCA RCP
     application.
 
@@ -321,7 +286,7 @@ Adding the export wizard
 
 We now write the export wizard:
 
-``` {.java language="Java"}
+```java
 public class ExportWizard extends Wizard implements IExportWizard{
   
   private ModelSelectionPage page;
@@ -353,7 +318,7 @@ public class ExportWizard extends Wizard implements IExportWizard{
 
 And we register the wizard in the `plugin.xml` of our project:
 
-``` {language="xml"}
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
@@ -388,7 +353,7 @@ structure](images/plugin_final_structure.png){height="250px"}
 
 Finally, we call our export in the wizard:
 
-``` {.java language="Java"}
+```java
 @Override
 public boolean performFinish() {
   File dir = page.getExportDestination();
